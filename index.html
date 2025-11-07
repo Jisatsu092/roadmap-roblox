@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Fashion Game Roadmap</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .progress-container {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .progress-bar-container {
+            background: #e0e0e0;
+            border-radius: 20px;
+            height: 30px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            border-radius: 20px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .phase {
+            margin-bottom: 40px;
+            border-left: 4px solid #667eea;
+            padding-left: 20px;
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .phase-icon {
+            font-size: 2em;
+            margin-right: 15px;
+        }
+
+        .phase-title {
+            font-size: 1.8em;
+            color: #667eea;
+            flex: 1;
+        }
+
+        .phase-duration {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        .phase-description {
+            color: #666;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .week {
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .week-header {
+            font-size: 1.3em;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .task {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .task:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateX(5px);
+        }
+
+        .task.completed {
+            opacity: 0.6;
+        }
+
+        .task.completed .task-text {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #667eea;
+            border-radius: 6px;
+            margin-right: 15px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox.checked {
+            background: #667eea;
+        }
+
+        .checkbox.checked::after {
+            content: "✓";
+            color: white;
+            font-weight: bold;
+        }
+
+        .task-content {
+            flex: 1;
+        }
+
+        .task-text {
+            font-size: 1.05em;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .task-output {
+            font-size: 0.9em;
+            color: #667eea;
+            font-weight: 500;
+            margin-top: 5px;
+        }
+
+        .tips-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .tips-box h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .tips-box ul {
+            margin-left: 20px;
+        }
+
+        .tips-box li {
+            color: #856404;
+            margin-bottom: 5px;
+        }
+
+        .resources {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .resources h4 {
+            color: #0c5460;
+            margin-bottom: 10px;
+        }
+
+        .resources ul {
+            margin-left: 20px;
+        }
+
+        .resources li {
+            color: #0c5460;
+            margin-bottom: 5px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .collapsed .week {
+            display: none;
+        }
+
+        .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .phase-title {
+                font-size: 1.3em;
+            }
+
+            .stats {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎮 Roblox Fashion Game Roadmap</h1>
+            <p>Your journey to creating an awesome fashion runway experience!</p>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar">0%</div>
+            </div>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number" id="completedTasks">0</div>
+                    <div class="stat-label">Completed Tasks</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="totalTasks">0</div>
+                    <div class="stat-label">Total Tasks</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="currentWeek">Week 0</div>
+                    <div class="stat-label">Current Progress</div>
+                </div>
+            </div>
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="exportProgress()">💾 Export Progress</button>
+                <button class="btn btn-secondary" onclick="importProgress()">📥 Import Progress</button>
+                <button class="btn btn-danger" onclick="resetProgress()">🔄 Reset All</button>
+            </div>
+        </div>
+
+        <div class="content" id="content">
+            <!-- Content will be generated by JavaScript -->
+        </div>
+
+        <div class="footer">
+            <p>💪 Keep pushing! Every task completed brings you closer to your game launch!</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Made with ❤️ for aspiring Roblox developers</p>
+        </div>
+    </div>
+
+    <script>
+        const roadmapData = [
+            {
+                phase: "Phase 0: Persiapan",
+                icon: "📚",
+                duration: "1-2 Weeks",
+                description: "Belajar fundamental Roblox Studio & Lua scripting",
+                weeks: [
+                    {
+                        title: "Week 1: Belajar Basics",
+                        tasks: [
+                            { text: "Download & install Roblox Studio", output: "Studio ready to use" },
+                            { text: "Tutorial dasar: UI, toolbox, part editor", output: "Familiar dengan interface" },
+                            { text: "Bikin map simple (rumah kecil atau toko kecil)", output: "First map created" },
+                            { text: "Practice: move, rotate, scale objects", output: "Can manipulate objects" },
+                            { text: "Nonton AlvinBlox 'Beginner Scripting' playlist", output: "Lua basics understood" },
+                            { text: "Belajar: Variables, Functions, If statements", output: "Core concepts learned" },
+                            { text: "Belajar: Loops (for, while)", output: "Can use loops" },
+                            { text: "Belajar: Events (.Touched, .Click, etc)", output: "Understand events" },
+                            { text: "Practice: bikin door yang bisa dibuka", output: "Working door script" },
+                            { text: "Practice: bikin teleporter sederhana", output: "Working teleporter" }
+                        ],
+                        tips: [
+                            "Jangan perfeksionis! Focus on learning, not perfection",
+                            "Practice setiap hari minimal 1-2 jam",
+                            "Join Roblox DevForum untuk cari bantuan"
+                        ],
+                        resources: [
+                            "YouTube: AlvinBlox - Beginner Scripting",
+                            "YouTube: TheDevKing - Roblox Tutorials",
+                            "Roblox Dev Hub: create.roblox.com/docs"
+                        ]
+                    }
+                ]
+            },
+            {
+                phase: "Phase 1: MVP (Minimum Viable Product)",
+                icon: "🎯",
+                duration: "3-4 Weeks",
+                description: "Bikin versi paling simple yang bisa di-publish & di-test",
+                weeks: [
+                    {
+                        title: "Week 2: Building Map Dasar",
+                        tasks: [
+                            { text: "Sketch di kertas: map layout", output: "Layout plan" },
+                            { text: "Tentuin color scheme & theme", output: "Visual direction" },
+                            { text: "Cari reference images (Pinterest, Google)", output: "Reference board" },
+                            { text: "Bikin walls, floor, ceiling", output: "Building structure" },
+                            { text: "Bikin runway path (simple walkway)", output: "Runway area" },
+                            { text: "Bikin seating area sederhana", output: "Audience area" },
+                            { text: "Add basic lighting", output: "Lit environment" },
+                            { text: "Tambah props dari Toolbox", output: "Decorated space" },
+                            { text: "Test walking around map", output: "Playable map" },
+                            { text: "Adjust spacing & sizes", output: "Optimized layout" }
+                        ],
+                        tips: [
+                            "Simple shapes (rectangle & cube) are enough!",
+                            "Reuse parts - copy-paste sebanyak mungkin",
+                            "Test walk-through every 30 minutes",
+                            "Map gak harus cantik dulu, functionality first!"
+                        ],
+                        resources: [
+                            "YouTube: PeasFactory - Building Tutorials",
+                            "Toolbox: Free models untuk decorations",
+                            "Pinterest: Fashion runway references"
+                        ]
+                    },
+                    {
+                        title: "Week 3: Basic Scripting",
+                        tasks: [
+                            { text: "Create Game Pass di Creator Dashboard", output: "Game Pass created" },
+                            { text: "Script: Check if player has VIP Pass", output: "VIP detection works" },
+                            { text: "Script: Prompt purchase kalo belom punya", output: "Purchase prompt works" },
+                            { text: "Test: Buy pass & verify detection", output: "System verified" },
+                            { text: "Insert dummy/rig dari Toolbox", output: "Mannequin model ready" },
+                            { text: "Practice: Clone mannequin via script", output: "Can clone mannequins" },
+                            { text: "Practice: Move mannequin to position", output: "Can position mannequins" },
+                            { text: "Script: Spawn mannequin saat player join", output: "Auto-spawn works" },
+                            { text: "Bikin waypoints di runway (invisible parts)", output: "Path defined" },
+                            { text: "Script: Mannequin walk dari point A ke B", output: "Walking system works" }
+                        ],
+                        tips: [
+                            "Google 'roblox how to...' adalah teman lu!",
+                            "Copy-paste dari DevHub, modify as needed",
+                            "Use print() statements untuk debug",
+                            "Test per feature, jangan gabung semua"
+                        ],
+                        resources: [
+                            "DevHub: MarketplaceService documentation",
+                            "DevHub: Humanoid:MoveTo() examples",
+                            "DevForum: Ask questions bila stuck"
+                        ]
+                    },
+                    {
+                        title: "Week 4: Connect Everything",
+                        tasks: [
+                            { text: "Research: HumanoidDescription API", output: "API understood" },
+                            { text: "Script: Get player's HumanoidDescription", output: "Can capture outfits" },
+                            { text: "Script: Apply description ke mannequin", output: "Can clone outfits" },
+                            { text: "Test: Clone player outfit ke mannequin", output: "Outfit cloning works" },
+                            { text: "Script: Spawn 1 mannequin every 30 seconds", output: "Timing system works" },
+                            { text: "Script: Walk runway then destroy", output: "Full cycle works" },
+                            { text: "Test: Loop continues infinitely", output: "Infinite loop stable" },
+                            { text: "Create BillboardGui for name tag", output: "Label system created" },
+                            { text: "Script: Show 'VIP PLAYER' or 'SHOWCASE'", output: "Labels display correctly" },
+                            { text: "Style: Colors, fonts", output: "Polished labels" }
+                        ],
+                        tips: [
+                            "HumanoidDescription is key - study it well!",
+                            "task.wait() untuk timing, jangan while true do",
+                            "Test dengan multiple players (alt accounts)",
+                            "MILESTONE: Lu udah bisa publish MVP!"
+                        ],
+                        resources: [
+                            "DevHub: HumanoidDescription guide",
+                            "DevHub: BillboardGui tutorial",
+                            "Test with friends for feedback"
+                        ]
+                    }
+                ]
+            },
+            {
+                phase: "Phase 2: Enhanced Version",
+                icon: "🚀",
+                duration: "2-3 Weeks",
+                description: "Improve experience & tambah features penting",
+                weeks: [
+                    {
+                        title: "Week 5: Showcase System",
+                        tasks: [
+                            { text: "Pilih 10-20 outfit dari catalog", output: "Curated collection" },
+                            { text: "Save outfit data (IDs, names)", output: "Database ready" },
+                            { text: "Script: Load outfit from ID", output: "Can load outfits" },
+                            { text: "Create table of showcase outfits", output: "Collection system" },
+                            { text: "Script: Pick 5 random dari collection", output: "Random selection works" },
+                            { text: "Script: Pick 1 VIP (if exists)", output: "VIP integration works" },
+                            { text: "Combine into runway queue", output: "Mixed system works" },
+                            { text: "Create info board/hologram model", output: "Display model ready" },
+                            { text: "Add outfit name & 'BUY' text", output: "Info displayed" },
+                            { text: "Position next to mannequin", output: "Complete showcase" }
+                        ],
+                        tips: [
+                            "Curate outfits with different styles",
+                            "Mix popular & niche untuk variety",
+                            "Test random selection thoroughly",
+                            "Make info boards readable & attractive"
+                        ],
+                        resources: [
+                            "Roblox Catalog: Browse trending items",
+                            "DevHub: GetProductInfo for item data",
+                            "Free hologram models from Toolbox"
+                        ]
+                    },
+                    {
+                        title: "Week 6: Purchase & Polish",
+                        tasks: [
+                            { text: "Research: MarketplaceService:PromptPurchase", output: "Purchase API learned" },
+                            { text: "Create purchase UI (simple GUI)", output: "UI created" },
+                            { text: "Script: Show outfit details on click", output: "Details display" },
+                            { text: "Script: Prompt purchase for items", output: "Purchase flow works" },
+                            { text: "Test: Can buy items successfully", output: "System verified" },
+                            { text: "Improve lighting (spotlights on runway)", output: "Better atmosphere" },
+                            { text: "Add music/ambient sound", output: "Audio added" },
+                            { text: "Smooth camera angles", output: "Better views" },
+                            { text: "Test with friends", output: "Feedback collected" },
+                            { text: "Fix bugs & optimize performance", output: "Polished experience" }
+                        ],
+                        tips: [
+                            "Test purchase flow thoroughly",
+                            "Make sure mobile-friendly",
+                            "Audio volume should be adjustable",
+                            "Get honest feedback from testers"
+                        ],
+                        resources: [
+                            "DevHub: PromptPurchase guide",
+                            "Audio Library: Roblox music catalog",
+                            "Beta testers: Friends/Discord community"
+                        ]
+                    }
+                ]
+            },
+            {
+                phase: "Phase 3: Launch & Iterate",
+                icon: "📱",
+                duration: "1+ Weeks",
+                description: "Go live & maintain your game!",
+                weeks: [
+                    {
+                        title: "Week 7: Pre-Launch & Launch",
+                        tasks: [
+                            { text: "Full playthrough as new player", output: "User experience tested" },
+                            { text: "Test all features comprehensively", output: "All systems go" },
+                            { text: "Check mobile compatibility", output: "Mobile-ready" },
+                            { text: "Fix critical bugs", output: "Stable build" },
+                            { text: "Create thumbnail (Canva/Photoshop)", output: "Eye-catching thumbnail" },
+                            { text: "Write compelling game description", output: "Marketing copy ready" },
+                            { text: "Record trailer video (30-60 sec)", output: "Promo video ready" },
+                            { text: "Prepare social posts", output: "Marketing materials" },
+                            { text: "Soft launch (unlisted, invite friends)", output: "Beta tested" },
+                            { text: "PUBLIC LAUNCH! Set game to Public", output: "GAME LIVE! 🎉" }
+                        ],
+                        tips: [
+                            "First impression matters - polish thumbnail!",
+                            "Description should be clear & exciting",
+                            "Trailer should show key features",
+                            "Launch on weekend for max visibility"
+                        ],
+                        resources: [
+                            "Canva: Free thumbnail maker",
+                            "OBS Studio: Free recording software",
+                            "TikTok/Twitter: Share your launch"
+                        ]
+                    },
+                    {
+                        title: "Week 8+: Post-Launch",
+                        tasks: [
+                            { text: "Monitor daily: bugs, feedback, metrics", output: "Active maintenance" },
+                            { text: "Respond to player comments", output: "Community engagement" },
+                            { text: "Plan first content update", output: "Update roadmap" },
+                            { text: "Add new showcase outfits", output: "Fresh content" },
+                            { text: "Fix reported bugs", output: "Improved stability" },
+                            { text: "Quality improvements based on feedback", output: "Better UX" },
+                            { text: "Plan seasonal event (Halloween, Christmas)", output: "Event strategy" },
+                            { text: "Consider ads/sponsors (optional)", output: "Growth strategy" },
+                            { text: "Celebrate your success!", output: "You're a game dev! 🎉" }
+                        ],
+                        tips: [
+                            "Regular updates keep players coming back",
+                            "Listen to feedback but stay focused",
+                            "Small consistent updates > big rare ones",
+                            "Build community around your game"
+                        ],
+                        resources: [
+                            "Roblox Analytics: Track your metrics",
+                            "Discord: Create game community",
+                            "DevForum: Share your success story"
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        let progress = {};
+
+        function loadProgress() {
+            const saved = localStorage.getItem('robloxRoadmapProgress');
+            if (saved) {
+                progress = JSON.parse(saved);
+            }
+        }
+
+        function saveProgress() {
+            localStorage.setItem('robloxRoadmapProgress', JSON.stringify(progress));
+            updateStats();
+        }
+
+        function generateContent() {
+            const content = document.getElementById('content');
+            let taskId = 0;
+
+            roadmapData.forEach((phase, phaseIndex) => {
+                const phaseDiv = document.createElement('div');
+                phaseDiv.className = 'phase';
+                phaseDiv.id = `phase-${phaseIndex}`;
+
+                phaseDiv.innerHTML = `
+                    <div class="phase-header" onclick="togglePhase(${phaseIndex})">
+                        <span class="phase-icon">${phase.icon}</span>
+                        <h2 class="phase-title">${phase.phase}</h2>
+                        <span class="phase-duration">${phase.duration}</span>
+                        <span class="toggle-icon" style="margin-left: 15px; font-size: 1.5em;">▼</span>
+                    </div>
+                    <p class="phase-description">${phase.description}</p>
+                `;
+
+                phase.weeks.forEach(week => {
+                    const weekDiv = document.createElement('div');
+                    weekDiv.className = 'week';
+
+                    let weekHTML = `<div class="week-header">${week.title}</div>`;
+
+                    week.tasks.forEach(task => {
+                        const isCompleted = progress[taskId] || false;
+                        weekHTML += `
+                            <div class="task ${isCompleted ? 'completed' : ''}" onclick="toggleTask(${taskId})">
+                                <div class="checkbox ${isCompleted ? 'checked' : ''}" id="checkbox-${taskId}"></div>
+                                <div class="task-content">
+                                    <div class="task-text">${task.text}</div>
+                                    <div class="task-output">📦 Output: ${task.output}</div>
+                                </div>
+                            </div>
+                        `;
+                        taskId++;
+                    });
+
+                    if (week.tips) {
+                        weekHTML += `
+                            <div class="tips-box">
+                                <h4>⚠️ Tips:</h4>
+                                <ul>
+                                    ${week.tips.map(tip => `<li>${tip}</li>`).join('')}
+                                </ul>
+                            </div>
+                        `;
+                    }
+
+                    if (week.resources) {
+                        weekHTML += `
+                            <div class="resources">
+                                <h4>📚 Resources:</h4>
+                                <ul>
+                                    ${week.resources.map(resource => `<li>${resource}</li>`).join('')}
+                                </ul>
+                            </div>
+                        `;
+                    }
+
+                    weekDiv.innerHTML = weekHTML;
+                    phaseDiv.appendChild(weekDiv);
+                });
+
+                content.appendChild(phaseDiv);
+            });
+
+            updateStats();
+        }
+
+        function toggleTask(id) {
+            progress[id] = !progress[id];
+            const task = event.currentTarget;
+            const checkbox = document.getElementById(`checkbox-${id}`);
+            
+            if (progress[id]) {
+                task.classList.add('completed');
+                checkbox.classList.add('checked');
+            } else {
+                task.classList.remove('completed');
+                checkbox.classList.remove('checked');
+            }
+            
+            saveProgress();
+        }
+
+        function togglePhase(phaseIndex) {
+            const phase = document.getElementById(`phase-${phaseIndex}`);
+            phase.classList.toggle('collapsed');
+        }
+
+        function updateStats() {
+            const totalTasks = Object.keys(progress).length > 0 ? 
+                Math.max(...Object.keys(progress).map(k => parseInt(k))) + 1 : 
+                roadmapData.reduce((sum, phase) => sum + phase.weeks.reduce((wsum, week) => wsum + week.tasks.length, 0), 0);
+            
+            const completedTasks = Object.values(progress).filter(v => v).length;
+            const percentage = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+
+            document.getElementById('totalTasks').textContent = totalTasks;
+            document.getElementById('completedTasks').textContent = completedTasks;
+            document.getElementById('progressBar').style.width = percentage + '%';
+            document.getElementById('progressBar').textContent = percentage + '%';
+
+            const currentWeek = Math.floor(completedTasks / 10) + 1;
+            document.getElementById('currentWeek').textContent = `Week ${Math.min(currentWeek, 8)}`;
+        }
+
+        function resetProgress() {
+            if (confirm('Are you sure you want to reset all progress? This cannot be undone!')) {
+                localStorage.removeItem('robloxRoadmapProgress');
+                location.reload();
+            }
+        }
+
+        function exportProgress() {
+            const dataStr = JSON.stringify(progress);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'roblox-roadmap-progress.json';
+            link.click();
+            URL.revokeObjectURL(url);
+            alert('✅ Progress exported! Save this file to backup your progress.');
+        }
+
+        function importProgress() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'application/json';
+            input.onchange = e => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onload = event => {
+                    try {
+                        const imported = JSON.parse(event.target.result);
+                        progress = imported;
+                        saveProgress();
+                        location.reload();
+                        alert('✅ Progress imported successfully!');
+                    } catch (error) {
+                        alert('❌ Error importing file. Make sure it\'s a valid progress file.');
+                    }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        // Initialize
+        loadProgress();
+        generateContent();
+    </script>
+</body>
+</html>
