@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roadmap Game Fashion Roblox - Super Detail</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .progress-container {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .progress-bar-container {
+            background: #e0e0e0;
+            border-radius: 20px;
+            height: 30px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .phase {
+            margin-bottom: 40px;
+            border-left: 4px solid #667eea;
+            padding-left: 20px;
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .phase-icon {
+            font-size: 2em;
+            margin-right: 15px;
+        }
+
+        .phase-title {
+            font-size: 1.8em;
+            color: #667eea;
+            flex: 1;
+        }
+
+        .week {
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .week-header {
+            font-size: 1.3em;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .task-main {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            border: 2px solid #e0e0e0;
+        }
+
+        .task-header {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .task-header:hover {
+            background: #f8f9fa;
+        }
+
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #667eea;
+            border-radius: 6px;
+            margin-right: 15px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox.checked {
+            background: #667eea;
+        }
+
+        .checkbox.checked::after {
+            content: "✓";
+            color: white;
+            font-weight: bold;
+        }
+
+        .task-title {
+            flex: 1;
+            font-size: 1.05em;
+            font-weight: 600;
+        }
+
+        .expand-icon {
+            font-size: 1.2em;
+            transition: transform 0.3s;
+            margin-left: 10px;
+        }
+
+        .task-main.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .task-details {
+            display: none;
+            padding: 20px;
+            background: #f8f9fa;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .task-main.expanded .task-details {
+            display: block;
+        }
+
+        .detail-section {
+            margin-bottom: 20px;
+        }
+
+        .detail-section h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .detail-section ul {
+            margin-left: 20px;
+        }
+
+        .detail-section li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .resource-link {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 5px;
+            transition: background 0.3s;
+        }
+
+        .resource-link:hover {
+            background: #5568d3;
+        }
+
+        .substep {
+            background: white;
+            padding: 10px;
+            margin: 5px 0;
+            border-left: 3px solid #667eea;
+            border-radius: 4px;
+        }
+
+        .tip-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .warning-box {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            margin: 5px;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>👗 Game Fashion Runway Roblox</h1>
+            <p>Roadmap Super Detail - Dari Nol Sampai Launch!</p>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar">0%</div>
+            </div>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number" id="completedTasks">0</div>
+                    <div class="stat-label">Selesai</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="totalTasks">0</div>
+                    <div class="stat-label">Total Tugas</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="currentWeek">Minggu 0</div>
+                    <div class="stat-label">Progress</div>
+                </div>
+            </div>
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="exportProgress()">💾 Export Progress</button>
+                <button class="btn btn-primary" onclick="importProgress()">📥 Import Progress</button>
+                <button class="btn btn-primary" onclick="expandAll()">📖 Buka Semua</button>
+                <button class="btn btn-primary" onclick="collapseAll()">📕 Tutup Semua</button>
+            </div>
+        </div>
+
+        <div class="content" id="content"></div>
+    </div>
+
+    <script>
+        const roadmapData = [
+            {
+                phase: "Phase 0: Setup & Belajar Dasar",
+                icon: "📚",
+                duration: "1-2 Minggu",
+                weeks: [
+                    {
+                        title: "Minggu 1: Install & Belajar Interface",
+                        tasks: [
+                            {
+                                title: "Download & Install Roblox Studio",
+                                steps: [
+                                    "Buka website create.roblox.com di browser",
+                                    "Klik tombol 'Start Creating' (warna biru)",
+                                    "Download installer Roblox Studio (.exe file)",
+                                    "Klik kanan installer → Run as Administrator",
+                                    "Tunggu proses install (5-10 menit, tergantung internet)",
+                                    "Login pake akun Roblox kamu (bikin dulu kalo belum punya)",
+                                    "Verifikasi: Buka Studio, harusnya muncul template game",
+                                    "Pilih 'Baseplate' untuk mulai project kosong"
+                                ],
+                                tools: [
+                                    "Roblox Studio (Gratis)",
+                                    "Akun Roblox (bikin di roblox.com kalo belum ada)",
+                                    "Koneksi internet (buat download & cloud save)"
+                                ],
+                                videos: [
+                                    { title: "Cara Install Roblox Studio", url: "https://www.youtube.com/watch?v=1KwSgKTwY-M" }
+                                ],
+                                tips: [
+                                    "Pake password yang kuat buat akun kamu",
+                                    "Aktifin 2-step verification biar lebih aman",
+                                    "Studio bakal auto-update, biarkan aja sampe selesai",
+                                    "Kalo install gagal, matiin antivirus dulu"
+                                ],
+                                warnings: [
+                                    "Jangan share password/cookie akun kamu ke siapapun!",
+                                    "Install HANYA dari create.roblox.com (jangan dari situs lain)"
+                                ],
+                                output: "✅ Roblox Studio terinstall dan siap dipake"
+                            },
+                            {
+                                title: "Kenalan dengan Interface Studio",
+                                steps: [
+                                    "Buka Roblox Studio",
+                                    "Pilih 'Baseplate' template (project kosong)",
+                                    "Lihat kiri: Toolbox (tempat cari model gratis)",
+                                    "Lihat kanan: Properties panel (atur setting object)",
+                                    "Lihat kanan: Explorer panel (struktur folder game)",
+                                    "Atas: Toolbar (tools buat edit object)",
+                                    "Praktek: Insert > Part (bikin kotak)",
+                                    "Praktek: Klik Part, pake tools Move/Rotate/Scale",
+                                    "Praktek: Delete Part (select Part, tekan Delete)",
+                                    "Save project: File > Save to Roblox (kasih nama)"
+                                ],
+                                videos: [
+                                    { title: "Tour Interface Roblox Studio", url: "https://www.youtube.com/watch?v=tSXDVjGGFT8" },
+                                    { title: "Tutorial Building Dasar", url: "https://www.youtube.com/watch?v=aw-OXP5s5vI" }
+                                ],
+                                tips: [
+                                    "Shortcut penting: Ctrl+S = Save, Ctrl+Z = Undo",
+                                    "Nyalain Grid Snap (atas) biar object rapi",
+                                    "Camera: WASD gerakin, klik kanan + drag putar view",
+                                    "Kalo bingung, coba tutorial 'Obby' dulu (ada di Studio)"
+                                ],
+                                output: "✅ Ngerti cara navigasi dan pake tools dasar"
+                            },
+                            {
+                                title: "Bikin Ruangan Simple Pertama Kamu",
+                                steps: [
+                                    "Insert Part > Block (ini bakal jadi lantai)",
+                                    "Ubah ukuran: Properties > Size > 50, 1, 50 studs",
+                                    "Anchor biar gak jatuh: Properties > Anchored = true (centang)",
+                                    "Duplicate lantai (Ctrl+D) buat jadi dinding",
+                                    "Rotate & posisiin jadi 4 dinding (kiri, kanan, depan, belakang)",
+                                    "Duplicate lagi buat ceiling (atap)",
+                                    "Warnain parts: Properties > BrickColor (pilih warna)",
+                                    "Cari 'SpawnLocation' di Toolbox, drag ke ruangan",
+                                    "Taro spawn di tengah ruangan",
+                                    "Test game: Klik tombol Play (F5)"
+                                ],
+                                videos: [
+                                    { title: "Cara Bikin Rumah Simple", url: "https://www.youtube.com/watch?v=aw-OXP5s5vI" }
+                                ],
+                                tips: [
+                                    "Semua Part HARUS di-Anchor (dicentang) biar gak jatuh!",
+                                    "Nyalain Collisions (atas) biar gak nabrak sendiri",
+                                    "Test game setiap 5 menit biar cepet tau kalo ada error",
+                                    "Pake Part simple dulu, gak perlu model fancy"
+                                ],
+                                warnings: [
+                                    "Kalo spawn di luar ruangan, player bakal jatuh!",
+                                    "Part yang gak di-anchor bakal jatuh pas di-play"
+                                ],
+                                output: "✅ Ruangan pertama yang bisa dimasukin player"
+                            },
+                            {
+                                title: "Belajar Lua Dasar - Variables & Print",
+                                steps: [
+                                    "Tonton video AlvinBlox tentang Variables dulu",
+                                    "Di Studio: ServerScriptService > klik + > Script",
+                                    "Ketik di script: print('Hello World')",
+                                    "Jalanin game (F5), cek Output window (bawah)",
+                                    "Pelajari: local namaKamu = 'Nama Lo'",
+                                    "Pelajari: local umur = 15",
+                                    "Praktek: print(namaKamu .. ' umur ' .. umur)",
+                                    "Pelajari: Variable bisa diubah nilainya",
+                                    "Praktek: Bikin 5 variable berbeda (nama, umur, warna favorit, dll)",
+                                    "Quiz sendiri: Bedanya 'local' sama gak pake 'local' apa?"
+                                ],
+                                videos: [
+                                    { title: "AlvinBlox - Variables (Subtitle ID)", url: "https://www.youtube.com/watch?v=v9AM6RV7BiA" },
+                                    { title: "TheDevKing - Dasar Lua", url: "https://www.youtube.com/watch?v=CS1PW6VqaKI" }
+                                ],
+                                resources: [
+                                    { name: "Panduan Lua Roblox (Bahasa Inggris)", url: "https://create.roblox.com/docs/scripting/luau" }
+                                ],
+                                tips: [
+                                    "Selalu pake 'local' buat variable (lebih aman)",
+                                    "print() adalah sahabat debugging kamu!",
+                                    "Output window (bawah) nunjukin error warna merah",
+                                    ".. artinya 'gabungin' (concatenation) di Lua"
+                                ],
+                                output: "✅ Ngerti cara bikin variable dan print"
+                            },
+                            {
+                                title: "Belajar Function (Fungsi)",
+                                steps: [
+                                    "Tonton tutorial tentang function",
+                                    "Pelajari syntax: function namaFungsi() end",
+                                    "Praktek: Bikin function yang print pesan",
+                                    "Panggil function: namaFungsi()",
+                                    "Pelajari: Function dengan parameter",
+                                    "Praktek: function sapa(nama) print('Hai ' .. nama) end",
+                                    "Pelajari: Return values (nilai balik)",
+                                    "Praktek: function tambah(a, b) return a + b end",
+                                    "Bikin 3 function sendiri (kali, bagi, gabungin text)",
+                                    "Test semua function kamu jalan dengan bener"
+                                ],
+                                videos: [
+                                    { title: "AlvinBlox - Functions", url: "https://www.youtube.com/watch?v=XcsPFKFSvbY" }
+                                ],
+                                tips: [
+                                    "Function = blok kode yang bisa dipake berulang",
+                                    "Nama function yang bagus = jelasin fungsinya",
+                                    "Test setiap function secara terpisah dulu",
+                                    "Pake return kalo mau dapet nilai balik"
+                                ],
+                                output: "✅ Bisa bikin dan pake function sendiri"
+                            },
+                            {
+                                title: "Belajar If Statements (Kondisi)",
+                                steps: [
+                                    "Tonton video tentang conditional logic",
+                                    "Pelajari: if kondisi then ... end",
+                                    "Praktek: if 5 > 3 then print('benar') end",
+                                    "Pelajari: else dan elseif",
+                                    "Praktek: Cek apakah angka positif atau negatif",
+                                    "Pelajari: Operator perbandingan (==, ~=, >, <, >=, <=)",
+                                    "Pelajari: Operator logika (and, or, not)",
+                                    "Praktek: System cek umur (dewasa/anak-anak)",
+                                    "Praktek: Bikin system cek password",
+                                    "Test berbagai kondisi berbeda"
+                                ],
+                                videos: [
+                                    { title: "Tutorial If Statements", url: "https://www.youtube.com/watch?v=JTBdFJzY1_s" }
+                                ],
+                                tips: [
+                                    "== itu cek kesamaan, = itu assign nilai",
+                                    "~= artinya 'tidak sama dengan'",
+                                    "Pake print() buat debugging kondisi",
+                                    "Indent code kamu biar gampang dibaca"
+                                ],
+                                output: "✅ Ngerti cara bikin logika kondisi"
+                            },
+                            {
+                                title: "Belajar Loops (For & While)",
+                                steps: [
+                                    "Tonton tutorial tentang loops",
+                                    "Pelajari: for i = 1, 10 do ... end",
+                                    "Praktek: Print angka 1 sampai 20",
+                                    "Pelajari: for i, v in pairs() do ... end",
+                                    "Praktek: Loop lewat table berisi nama-nama",
+                                    "Pelajari: while kondisi do ... end",
+                                    "Praktek: Hitung mundur dari 10 ke 0",
+                                    "Peringatan: Hindari infinite loop (loop tanpa henti)!",
+                                    "Praktek: Bikin countdown timer",
+                                    "Praktek: Loop buat spawn 10 Parts"
+                                ],
+                                videos: [
+                                    { title: "AlvinBlox - For Loops", url: "https://www.youtube.com/watch?v=8VJLbDsCHfE" },
+                                    { title: "Penjelasan While Loops", url: "https://www.youtube.com/watch?v=0HuBqpwuL0E" }
+                                ],
+                                tips: [
+                                    "For loops = kalo tau mau berapa kali looping",
+                                    "While loops = kalo gak tau pasti berapa kali",
+                                    "Selalu pastiin ada kondisi berhenti buat while",
+                                    "task.wait() biar game gak freeze"
+                                ],
+                                warnings: [
+                                    "Jangan bikin while true do tanpa task.wait()!",
+                                    "Infinite loop bakal bikin game crash!"
+                                ],
+                                output: "✅ Bisa pake for dan while loops"
+                            },
+                            {
+                                title: "Belajar Events (.Touched, .Clicked)",
+                                steps: [
+                                    "Tonton tutorial tentang events",
+                                    "Bikin Part di workspace",
+                                    "Tambahin Script ke Part itu",
+                                    "Pelajari: part.Touched:Connect(function(hit) end)",
+                                    "Praktek: Print pesan pas player sentuh Part",
+                                    "Pelajari: Cara dapetin player dari yang sentuh",
+                                    "Praktek: Ubah warna Part pas disentuh",
+                                    "Pelajari: ClickDetector buat event klik",
+                                    "Praktek: Bikin tombol yang bisa diklik",
+                                    "Bikin prototype pintu interaktif"
+                                ],
+                                videos: [
+                                    { title: "Tutorial Touched Event", url: "https://www.youtube.com/watch?v=Zjg95eH1NPI" },
+                                    { title: "Tutorial ClickDetector", url: "https://www.youtube.com/watch?v=zOz15mQAbjo" }
+                                ],
+                                tips: [
+                                    "Touched event SERING banget ke-trigger, pake debounce!",
+                                    "Cek hit.Parent:FindFirstChild('Humanoid') buat deteksi player",
+                                    "ClickDetector MaxActivationDistance = jarak maksimal klik",
+                                    "Debounce = delay supaya gak spam trigger"
+                                ],
+                                output: "✅ Ngerti event-driven programming"
+                            },
+                            {
+                                title: "Mini Project: Pintu yang Bisa Dibuka",
+                                steps: [
+                                    "Bikin frame pintu (2 Part samping, 1 Part atas)",
+                                    "Bikin daun pintu (Part yang pas ukurannya)",
+                                    "Tambahin ClickDetector ke pintu",
+                                    "Script: Cek apakah pintu lagi buka atau tutup (pake variable)",
+                                    "Kalo tutup: Pake TweenService geser pintu kebuka",
+                                    "Kalo buka: Pake TweenService tutup pintunya",
+                                    "Tambahin sound effect buka pintu",
+                                    "Test: Klik pintu berkali-kali",
+                                    "Polish: Tambahin debounce (jeda) biar gak bisa spam klik",
+                                    "Celebrate: Kamu udah bikin object interaktif!"
+                                ],
+                                videos: [
+                                    { title: "Cara Bikin Pintu yang Bisa Dibuka", url: "https://www.youtube.com/watch?v=CIq6hL0EZeM" }
+                                ],
+                                resources: [
+                                    { name: "Dokumentasi TweenService", url: "https://create.roblox.com/docs/reference/engine/classes/TweenService" }
+                                ],
+                                tips: [
+                                    "TweenService = buat animasi smooth",
+                                    "Debounce = cegah spam dengan delay",
+                                    "Test edge case (spam klik cepet-cepet)",
+                                    "Audio bikin pengalaman lebih hidup!"
+                                ],
+                                output: "✅ System pintu interaktif yang jalan"
+                            },
+                            {
+                                title: "Mini Project: Teleporter",
+                                steps: [
+                                    "Bikin 2 Parts: TeleportPad1 & TeleportPad2",
+                                    "Kasih warna beda (misal: biru & merah)",
+                                    "Tambahin Script ke TeleportPad1",
+                                    "Event Touched: Dapetin Character player",
+                                    "Dapetin HumanoidRootPart dari Character",
+                                    "Set HumanoidRootPart.CFrame ke TeleportPad2.CFrame",
+                                    "Tambahin offset +Vector3.new(0, 3, 0) buat jarak atas",
+                                    "Tambahin sound effect teleport",
+                                    "Tambahin particle effect (opsional, cari di Toolbox)",
+                                    "Test: Jalan ke pad, harusnya teleport!"
+                                ],
+                                videos: [
+                                    { title: "Tutorial Teleporter", url: "https://www.youtube.com/watch?v=GYUuqfDfELY" }
+                                ],
+                                tips: [
+                                    "CFrame = posisi + rotasi object",
+                                    "WAJIB pake debounce di Touched event!",
+                                    "Test pake alt account buat multiplayer",
+                                    "Particle effect bikin kelihatan lebih keren"
+                                ],
+                                warnings: [
+                                    "Jangan lupa debounce, nanti player ke-teleport berulang!",
+                                    "Pastiin TeleportPad2 gak di atas/dalem object lain"
+                                ],
+                                output: "✅ System teleporter yang berfungsi"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        let progress = {};
+        let taskIdCounter = 0;
+
+        function generateTaskId() {
+            return taskIdCounter++;
+        }
+
+        function loadProgress() {
+            const saved = localStorage.getItem('robloxDetailedProgress');
+            if (saved) {
+                progress = JSON.parse(saved);
+            }
+        }
+
+        function saveProgress() {
+            localStorage.setItem('robloxDetailedProgress', JSON.stringify(progress));
+            updateStats();
+        }
+
+        function generateContent() {
+            const content = document.getElementById('content');
+
+            roadmapData.forEach(phase => {
+                const phaseDiv = document.createElement('div');
+                phaseDiv.className = 'phase';
+                
+                phaseDiv.innerHTML = `
+                    <div class="phase-header">
+                        <span class="phase-icon">${phase.icon}</span>
+                        <h2 class="phase-title">${phase.phase}</h2>
+                        <span style="background:#764ba2;color:white;padding:5px 15px;border-radius:20px">${phase.duration}</span>
+                    </div>
+                `;
+
+                phase.weeks.forEach(week => {
+                    const weekDiv = document.createElement('div');
+                    weekDiv.className = 'week';
+                    weekDiv.innerHTML = `<div class="week-header">${week.title}</div>`;
+
+                    week.tasks.forEach(task => {
+                        const taskId = generateTaskId();
+                        const isCompleted = progress[taskId] || false;
+                        
+                        const taskDiv = document.createElement('div');
+                        taskDiv.className = 'task-main';
+                        if (isCompleted) taskDiv.classList.add('completed');
+                        
+                        let detailsHTML = '<div class="task-details">';
+                        
+                        if (task.steps) {
+                            detailsHTML += '<div class="detail-section"><h4>📋 Langkah-Langkah:</h4><ul>';
+                            task.steps.forEach(step => {
+                                detailsHTML += `<li class="substep">${step}</li>`;
+                            });
+                            detailsHTML += '</ul></div>';
+                        }
+
+                        if (task.tools) {
+                            detailsHTML += '<div class="detail-section"><h4>🛠️ Tools yang Dibutuhin:</h4><ul>';
+                            task.tools.forEach(tool => {
+                                detailsHTML += `<li>${tool}</li>`;
+                            });
+                            detailsHTML += '</ul></div>';
+                        }
+
+                        if (task.videos) {
+                            detailsHTML += '<div class="detail-section"><h4>🎥 Video Tutorial:</h4>';
+                            task.videos.forEach(video => {
+                                detailsHTML += `<a href="${video.url}" target="_blank" class="resource-link">▶️ ${video.title}</a>`;
+                            });
+                            detailsHTML += '</div>';
+                        }
+
+                        if (task.resources) {
+                            detailsHTML += '<div class="detail-section"><h4>📚 Sumber Belajar:</h4>';
+                            task.resources.forEach(resource => {
+                                detailsHTML += `<a href="${resource.url}" target="_blank" class="resource-link">🔗 ${resource.name}</a>`;
+                            });
+                            detailsHTML += '</div>';
+                        }
+
+                        if (task.tips) {
+                            detailsHTML += '<div class="tip-box"><h4>💡 Tips Penting:</h4><ul>';
+                            task.tips.forEach(tip => {
+                                detailsHTML += `<li>${tip}</li>`;
+                            });
+                            detailsHTML += '</ul></div>';
+                        }
+
+                        if (task.warnings) {
+                            detailsHTML += '<div class="warning-box"><h4>⚠️ Hati-Hati:</h4><ul>';
+                            task.warnings.forEach(warning => {
+                                detailsHTML += `<li>${warning}</li>`;
+                            });
+                            detailsHTML += '</ul></div>';
+                        }
+
+                        if (task.output) {
+                            detailsHTML += `<div class="info-box"><strong>🎯 Hasil Akhir:</strong> ${task.output}</div>`;
+                        }
+
+                        detailsHTML += '</div>';
+
+                        taskDiv.innerHTML = `
+                            <div class="task-header" onclick="toggleTask(${taskId})">
+                                <div class="checkbox ${isCompleted ? 'checked' : ''}" onclick="event.stopPropagation(); checkTask(${taskId})"></div>
+                                <div class="task-title">${task.title}</div>
+                                <span class="expand-icon">▼</span>
+                            </div>
+                            ${detailsHTML}
+                        `;
+
+                        weekDiv.appendChild(taskDiv);
+                    });
+
+                    phaseDiv.appendChild(weekDiv);
+                });
+
+                content.appendChild(phaseDiv);
+            });
+
+            updateStats();
+        }
+
+        function toggleTask(id) {
+            const taskDiv = event.currentTarget.closest('.task-main');
+            taskDiv.classList.toggle('expanded');
+        }
+
+        function checkTask(id) {
+            progress[id] = !progress[id];
+            saveProgress();
+            location.reload();
+        }
+
+        function updateStats() {
+            const totalTasks = taskIdCounter;
+            const completedTasks = Object.values(progress).filter(v => v).length;
+            const percentage = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+
+            document.getElementById('totalTasks').textContent = totalTasks;
+            document.getElementById('completedTasks').textContent = completedTasks;
+            document.getElementById('progressBar').style.width = percentage + '%';
+            document.getElementById('progressBar').textContent = percentage + '%';
+
+            const currentWeek = Math.floor(completedTasks / 10) + 1;
+            document.getElementById('currentWeek').textContent = `Minggu ${Math.min(currentWeek, 8)}`;
+        }
+
+        function exportProgress() {
+            const dataStr = JSON.stringify(progress);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'fashion-game-progress.json';
+            link.click();
+            URL.revokeObjectURL(url);
+            alert('✅ Progress berhasil di-export! Save file ini buat backup.');
+        }
+
+        function importProgress() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'application/json';
+            input.onchange = e => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onload = event => {
+                    try {
+                        const imported = JSON.parse(event.target.result);
+                        progress = imported;
+                        saveProgress();
+                        location.reload();
+                        alert('✅ Progress berhasil di-import!');
+                    } catch (error) {
+                        alert('❌ Error: File gak valid. Pastiin file-nya bener.');
+                    }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        function expandAll() {
+            document.querySelectorAll('.task-main').forEach(task => {
+                task.classList.add('expanded');
+            });
+        }
+
+        function collapseAll() {
+            document.querySelectorAll('.task-main').forEach(task => {
+                task.classList.remove('expanded');
+            });
+        }
+
+        loadProgress();
+        generateContent();
+    </script>
+</body>
+</html>
